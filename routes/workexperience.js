@@ -60,9 +60,16 @@ router.delete("/:id", async(req, res) => {
 // Uppdatera specfik arbetserfarenhet
 router.put("/:id", async(req, res) => {
     try {
-        let result = await WorkExperience.findByIdAndUpdate(req.params.id);
-        return res.json(result);
+        const { id } = req.params;
+        let result = await WorkExperience.findByIdAndUpdate(id, req.body);
 
+        //Felmeddelande om ett ID anges som inte finns med i databasen
+        if (!result) {
+            return res.status(404).json({ message: "Ange ett ID som finns med i databasen!" });
+        }
+        // Om uppdateringen lyckades
+        const updatedExperience = await WorkExperience.findById(id);
+        return res.status(200).json({ message: "Arbetserfarenheten uppdaterad!", updated: updatedExperience });
     } catch (error) {
         return res.status(400).json(error);
     }
