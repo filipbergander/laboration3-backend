@@ -17,8 +17,8 @@ mongoose.connect(process.env.DATABASE_URL).then(() => {
     console.log("Fel vid försök till anslutning mot databas: " + error);
 });
 
-// Routes
-app.use("/workexperiences", require("./routes/workexperience"));
+// Gör routesen enklare att använda i API:et, slipper skriva workexperience inom varje route
+app.use("/workexperiences", require("./routes/workexperience")); // Hämtar in från routes/workexperience.js
 
 // Standard till API:et med ett "välkomstmeddelande"
 app.get("/", async(req, res) => {

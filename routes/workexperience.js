@@ -8,8 +8,18 @@ const WorkExperience = require("../models/workexperience");
 // Hämta alla arbetserfarenheter
 router.get("/", async(req, res) => {
     try {
-        let result = await WorkExperience.find();
-        return res.json(result);
+        // Hämtar in alla tillagda arbetserfarenheter och sorterar dem efter startdatum där senaste jobbet kommer först
+        let result = await WorkExperience.find().sort({ start_date: -1 });
+        const formattedResult = result.map(row => ({
+            id: row._id,
+            company_name: row.company_name,
+            job_title: row.job_title,
+            location: row.location,
+            description: row.description,
+            start_date: row.start_date.toISOString().slice(0, 10),
+            end_date: row.end_date.toISOString().slice(0, 10)
+        }));
+        return res.json(formattedResult);
     } catch (error) {
         return res.status(500).json(error);
     }
@@ -18,7 +28,9 @@ router.get("/", async(req, res) => {
 // Hämta specifik arbetserfarenhet
 router.get("/:id", async(req, res) => {
     try {
+        // Hämtar in en specifik arbetserfarenhet genom det specifika ID:et på posten inom databasen
         let result = await WorkExperience.findById(req.params.id);
+        // Om det inte finns någon post i databasen med det angivna ID:et, så ges ett felmeddelande
         if (result == null) {
             return res.status(404).json({ message: "Ange ett ID som finns i databasen!" });
         }
@@ -44,10 +56,13 @@ router.post("/", async(req, res) => {
 // Radera specfik arbetserfarenhet
 router.delete("/:id", async(req, res) => {
     try {
+        // Letar upp det specifika ID:et inom databasen och raderar just den posten
         let result = await WorkExperience.findByIdAndDelete(req.params.id);
-        if (result == null) {
+        // Felmeddelande om det angivna ID:et inte finns med i databasen
+        if (!result) {
             return res.status(404).json({ message: "Ange ett ID som finns med i databasen!" });
         }
+        // Om raderingen lyckas
         return res.json({
             message: "Arbetserfarenheten raderades från databasen",
             deleted: result
@@ -60,6 +75,7 @@ router.delete("/:id", async(req, res) => {
 // Uppdatera specfik arbetserfarenhet
 router.put("/:id", async(req, res) => {
     try {
+        // Letar upp det specifika ID:et inom databasen och uppdaterar just det jobbet
         const { id } = req.params;
         let result = await WorkExperience.findByIdAndUpdate(id, req.body);
 
@@ -67,7 +83,7 @@ router.put("/:id", async(req, res) => {
         if (!result) {
             return res.status(404).json({ message: "Ange ett ID som finns med i databasen!" });
         }
-        // Om uppdateringen lyckades
+        // Om uppdateringen lyckades, ges ett meddelande med den uppdaterade posten
         const updatedExperience = await WorkExperience.findById(id);
         return res.status(200).json({ message: "Arbetserfarenheten uppdaterad!", updated: updatedExperience });
     } catch (error) {
@@ -75,4 +91,5 @@ router.put("/:id", async(req, res) => {
     }
 });
 
+// Exporterar router så att det kan användas inom fler filer
 module.exports = router;
