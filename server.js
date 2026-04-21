@@ -1,11 +1,11 @@
-require('dotenv').config();
+require('dotenv').config(); // För att använda miljövariabler inom .env-filen
 
-const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose');
+const express = require('express'); // Hämtar in express
+const cors = require('cors'); // Hämtar in cors för att kunna anropa webbtjänsten från en annan domän
+const mongoose = require('mongoose'); // Hämtar in mongoose
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000; // Porten som servern lyssnar på antingen från .env eller port 3000 som standard
 
 app.use(cors());
 app.use(express.json());

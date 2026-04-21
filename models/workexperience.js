@@ -1,7 +1,8 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); // Hämtar in mongoose
 
 
-//Schema för CV:et som definierar hur en arbetserfarenhet ska se ut inom databasen
+/*Schema för CV:et som definierar hur en arbetserfarenhet ska se ut inom databasen.
+Felmeddelande om något av fälten inte anges när man ska lägga till en ny erfarenhet.*/
 const CvSchema = new mongoose.Schema({
     company_name: {
         type: String,
@@ -24,9 +25,9 @@ const CvSchema = new mongoose.Schema({
         required: [true, "Ett startdatum måste anges!"]
     },
     end_date: {
-        type: Date,
-        required: [true, "Ett slutdatum måste anges!"]
+        type: Date
+            // ,required: [true, "Ett slutdatum måste anges!"]
     }
 });
 
-module.exports = mongoose.model("WorkExperience", CvSchema);
+module.exports = mongoose.model("WorkExperience", CvSchema); // Exporterar modellen för att kunna använda den i resten av webbtjänsten
