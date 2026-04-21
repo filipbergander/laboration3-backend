@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 // Ansluta till MongoDB
-mongoose.connect(process.env.DATABASE_URL).then(() => {
+mongoose.connect(process.env.MONGODB_URI).then(() => {
     console.log("Ansluten till Mongo-databas!")
 }).catch((error) => {
     console.log("Fel vid försök till anslutning mot databas: " + error);
@@ -28,5 +28,5 @@ app.get("/", async(req, res) => {
 // Lyssnar och startar servern
 app.listen(port, () => {
     console.log("Servern kör på port: " + port);
-    console.log("Länk: http://localhost:" + port);
+    //console.log("Länk: http://localhost:" + port);
 });
