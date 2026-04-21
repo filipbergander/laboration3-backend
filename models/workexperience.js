@@ -25,8 +25,8 @@ const CvSchema = new mongoose.Schema({
         required: [true, "Ett startdatum måste anges!"]
     },
     end_date: {
-        type: Date
-            // ,required: [true, "Ett slutdatum måste anges!"]
+        type: Date,
+        required: [true, "Ett slutdatum måste anges!"]
     }
 });
 
