@@ -6,7 +6,9 @@ En liveversion av APIet finns tillgänglig på följande URL: https://laboration
 
 ## Installation, databas
 API:et använder sig utav databasen MongoDB & Atlas.
-Klona ner källkodsfilerna, kör kommando npm install för att installera nödvändiga npm-paket. Inom denna webbtjänst används Mongoose som hjälpmedel till databasen. En dotenv-fil (.env.sample) finns för exempel på anslutningsmöjligheter. Inom katalogen models visas strukturen över data. Eftersom jag har använt MongoDB så skapas ett automatiskt ID till varje post.
+ Inom denna webbtjänst används Mongoose som hjälpmedel till databasen. En dotenv-fil (.env.sample) finns för exempel på anslutningsmöjligheter. Inom katalogen models visas strukturen över data. Eftersom jag har använt MongoDB så skapas ett automatiskt ID till varje post. 
+ 
+ Klona ner källkodsfilerna, kör kommando npm install för att installera nödvändiga npm-paket.
 
 | Fält          | Typ     | Beskrivning |
 |---------------|----------|-------------|
