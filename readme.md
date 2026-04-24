@@ -1,4 +1,4 @@
-# Webbtjänst för att hämta och skriva ut arbetslivserfarenheter som ett CV
+# Webbtjänst för CV
 Detta repository innehåller kod för ett enklare REST-API byggt med Express och Mongoose tillsammans med databasen MongoDB. Webbtjänsten är byggd för att hantera olika arbetslivserfarenheter som jag till viss del arbetet med tidigare. Grundläggande funktionalitet för CRUD (Create, Read, Update, Delete) är implementerad.
 
 ## Länk
